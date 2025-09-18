@@ -1,5 +1,6 @@
 # Ex. No:1b 			Study of Client Server Chat Applications
-
+## Register No : 212224230262
+## Name : SHOBANA.B
 ## Aim: 
 To perform a study on Client Server Chat Applications
 ## Introduction:
@@ -72,7 +73,55 @@ User authentication mechanisms are essential to ensure secure and authorized acc
 Client-server chat applications are versatile tools that facilitate real-time communication between users over a network. They incorporate various components, including server-side and client-side elements, and must consider factors such as security, scalability, and concurrency. As technology continues to advance, client-server chat applications remain integral for collaborative communication in various domains.
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
+## Program:
+```
+server.py
 
+import socket
+
+# Server setup
+host = '127.0.0.1'   # Localhost
+port = 5000          # Port number
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind((host, port))
+server_socket.listen(1)
+
+print("Server is listening on", host, ":", port)
+conn, addr = server_socket.accept()
+print("Connection from:", addr)
+
+while True:
+    data = conn.recv(1024).decode()
+    if not data:
+        break
+    print("Client:", data)
+    message = input("Server: ")
+    conn.send(message.encode())
+
+conn.close()
+
+client.py
+
+import socket
+
+# Client setup
+host = '127.0.0.1'   # Same as server
+port = 5000
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect((host, port))
+
+while True:
+    message = input("Client: ")
+    client_socket.send(message.encode())
+    data = client_socket.recv(1024).decode()
+    print("Server:", data)
+
+client_socket.close()
+```
+## Output:
+<img width="1358" height="330" alt="image" src="https://github.com/user-attachments/assets/6f110325-37b5-49e6-b6c3-d9ae3526a279" />
 
 ## Result:
 
